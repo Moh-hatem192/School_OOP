@@ -18,6 +18,18 @@ class Teacher:
     def __repr__(self):
         return f'Teacher: (name = {self.name}, job = {self.position}, email = {self.email}'
 
+    def calculate_gross_salary(self):
+        gross_salary = self.hours_worked * self.hourly_rate
+        return gross_salary
+    
+    def calculate_net_salary(self):
+        gross_salary = self.calculate_gross_salary()
+        net_salary = Finance.calculate_net_salary(gross_salary)
+        return net_salary
+    
+
+class Manager(Teacher):
+    pass
 
 class Teachers_file_handler:
     @classmethod
@@ -30,13 +42,12 @@ class Teachers_file_handler:
                     teacher.get('position'),
                     teacher.get('phone'),
                     teacher.get('email'),
-                    teacher.get('hours_worked'),
-                    teacher.get('hourly_rate'),
+                    float(teacher.get('hours_worked')),
+                    float(teacher.get('hourly_rate')),
                     teacher.get('job_type'),
                     True
                 )
                 All_teachers.add_teacher(teacher)
-
 
 class All_teachers:
     __Teachers = []    
@@ -47,3 +58,28 @@ class All_teachers:
     @classmethod
     def show_teachers(cls):
         return cls.__Teachers
+
+class Finance:
+    INSURANCE = 100
+    HIGH_RATE = 0.18
+    LOW_RATE = 0.4
+    FIXED_AMOUNT = 1400
+    RETIRMENT_COST = 15 
+    
+    @staticmethod
+    def calculate_tax(salary):
+        if salary >= Finance.FIXED_AMOUNT:
+            tax = Finance.HIGH_RATE * salary
+            return tax
+        tax = salary * Finance.LOW_RATE
+        return tax
+    
+    @staticmethod
+    def calculate_net_salary(salary):
+        All_deductions = Finance.RETIRMENT_COST + Finance.INSURANCE + Finance.calculate_tax(salary)
+        net_salary = salary - All_deductions
+        return net_salary    
+
+osama = Teacher('osama', 'chemistry teacher', '099', 'mohf', 100, 13)
+print(osama.calculate_gross_salary())
+print(osama.calculate_net_salary())
