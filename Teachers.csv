@@ -1,0 +1,6 @@
+name,position,phone,email,hours_worked,hourly_rate,job_type
+Osama,chemistry teacher,+962791234567,osam123@gmail.com,20,30,part_time
+Ahmed,biology teacher,+962791234598,ahme123@gmail.com,15,18,full-time
+Hassan,math teacher,+962791234571,hass123@gmail.com,16,24,part_time
+Khaled,arabic teacher,+962791234509,khal123@gmail.com,13,21,full-time
+Ayman,computer science teacher,+962791234324,ayma123@gmail.com,15,28,part_time
